@@ -7,5 +7,9 @@
     "esModuleInterop": true,
     "strict": true,
     "skipLibCheck": true
-  }
+  },
+  "include": [
+    "src/**/*",
+    "types/**/*"       // Add this line explicitly to include types folder
+  ]
 }
