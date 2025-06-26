@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Search, Type, Grid, List, Sliders, Globe, Palette } from 'lucide-react';
+import { Search, Type, Grid, List, Sliders, Globe, Palette, RefreshCw } from 'lucide-react';
 import axios from 'axios';
 import { useTheme } from './hooks/useTheme';
 import { ThemeToggle } from './components/ThemeToggle';
@@ -42,12 +42,22 @@ function App() {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [totalFonts, setTotalFonts] = useState(0);
-  const limit = 6; // Changed to 6 fonts per page
+  const limit = 6;
 
   const languages = {
     en: 'Everyone has the right to freedom of thought, conscience',
     np: 'सबै मानिसले विचार, विवेकको स्वतन्त्रता पाउने अधिकार राख्छन्',
     ko: '모든 사람은 사상과 양심의 자유를 가질 권리가 있습니다',
+  };
+
+  // Reset function
+  const handleReset = () => {
+    setSearchQuery('');
+    setSelectedCategory('all');
+    setLanguage('en');
+    setFontSize(40);
+    setCustomText('');
+    setCurrentPage(1);
   };
 
   // Update color based on theme
@@ -158,6 +168,14 @@ function App() {
                          text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 transition-colors"
             />
           </div>
+          <button
+            onClick={handleReset}
+            className="mt-2 flex items-center gap-2 px-3 py-2 w-full text-sm text-gray-600 dark:text-gray-300 
+                       hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
+          >
+            <RefreshCw className="w-4 h-4" />
+            Reset
+          </button>
         </div>
 
         <div className="flex-1 p-6 overflow-y-auto">
@@ -235,7 +253,7 @@ function App() {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-1">Category</label>
+                  <label className="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-1">Styles</label>
                   <select
                     value={selectedCategory}
                     onChange={(e) => setSelectedCategory(e.target.value)}

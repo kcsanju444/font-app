@@ -46,7 +46,7 @@ export const FontCard: React.FC<FontCardProps> = ({
   const isSupported = isLoaded && doesFontSupportText(font.id, previewText);
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700 
+    <div className="bg-white dark:bg-gray-800 rounded-xl p-6 border item-start border-gray-200 dark:border-gray-700 
                     hover:border-gray-300 dark:hover:border-gray-600 transition-all duration-200 
                     hover:shadow-lg dark:hover:shadow-xl group">
       <div className="flex items-start justify-between mb-4">
@@ -69,9 +69,9 @@ export const FontCard: React.FC<FontCardProps> = ({
         </button>
       </div>
 
-      <div className="min-h-[80px] flex items-center justify-center">
+      <div className="min-h-[80px] flex items-start justify-center">
         {!isLoaded ? (
-          <div className="flex items-center gap-2 text-gray-500 dark:text-gray-400">
+          <div className="flex items-start gap-2 text-gray-500 dark:text-gray-400">
             <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-500"></div>
             <span className="text-sm">Loading font...</span>
           </div>
