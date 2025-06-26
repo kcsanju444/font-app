@@ -1,15 +1,23 @@
 {
   "compilerOptions": {
-    "target": "es6",
-    "module": "commonjs",
-    "rootDir": "./src",
-    "outDir": "./dist",
-    "esModuleInterop": true,
+    "target": "ES2021",
+    "module": "CommonJS",
+    "lib": ["ES2021"],
     "strict": true,
-    "skipLibCheck": true
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "moduleResolution": "node",
+    "outDir": "dist",
+    "rootDir": "src",
+    "resolveJsonModule": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "typeRoots": [
+      "./node_modules/@types",
+      "./src/authentication/types/express",
+      "./src/types"
+    ]
   },
-  "include": [
-    "src/**/*",
-    "types/**/*"       // Add this line explicitly to include types folder
-  ]
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
 }

@@ -1,42 +1,256 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+@font-face {
+  font-family: 'Abel-Regular';
+  src: url('/fonts/Abel-Regular.ttf') format('truetype');
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+@font-face {
+  font-family: 'Lato-Black';
+  src: url('/fonts/Lato-Black.ttf') format('truetype');
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+@font-face {
+  font-family: 'Lato-BlackItalic';
+  src: url('/fonts/Lato-BlackItalic.ttf') format('truetype');
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+@font-face {
+  font-family: 'Lato-Bold';
+  src: url('/fonts/Lato-Bold.ttf') format('truetype');
 }
 
-.card {
-  padding: 2em;
+@font-face {
+  font-family: 'Lato-BoldItalic';
+  src: url('/fonts/Lato-BoldItalic.ttf') format('truetype');
 }
 
-.read-the-docs {
-  color: #888;
+@font-face {
+  font-family: 'Lato-Italic';
+  src: url('/fonts/Lato-Italic.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Lato-Light';
+  src: url('/fonts/Lato-Light.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Lato-LightItalic';
+  src: url('/fonts/Lato-LightItalic.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Lato-Regular';
+  src: url('/fonts/Lato-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Lora-Regular';
+  src: url('/fonts/Lora-Regular.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Montserrat-Italic';
+  src: url('/fonts/Montserrat-Italic-VariableFont_wght.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('/fonts/Montserrat-VariableFont_wght.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Nunito-Italic';
+  src: url('/fonts/Nunito-Italic-VariableFont_wght.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Nunito';
+  src: url('/fonts/Nunito-VariableFont_wght.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'OpenSans-Italic';
+  src: url('/fonts/OpenSans-Italic-VariableFont_wdth,wght.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'OpenSans';
+  src: url('/fonts/OpenSans-VariableFont_wdth,wght.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Poppins-Black';
+  src: url('/fonts/Poppins-Black.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Poppins-BlackItalic';
+  src: url('/fonts/Poppins-BlackItalic.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Poppins-Bold';
+  src: url('/fonts/Poppins-Bold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Raleway-Italic';
+  src: url('/fonts/Raleway-Italic-VariableFont_wght.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Raleway';
+  src: url('/fonts/Raleway-VariableFont_wght.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Roboto-Italic';
+  src: url('/fonts/Roboto-Italic-VariableFont_wdth,wght.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('/fonts/Roboto-VariableFont_wdth,wght.ttf') format('truetype');
+}
+/* 🇳🇵 Nepali Fonts */
+@font-face {
+  font-family: 'Noto Sans Devanagari';
+  src: url('/fonts/NotoSansDevanagari-Regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Hind';
+  src: url('/fonts/Hind-Regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Khand';
+  src: url('/fonts/Khand-Regular.woff2') format('woff2');
+}
+
+/* 🇰🇷 Korean Fonts */
+@font-face {
+  font-family: 'Noto Sans KR';
+  src: url('/fonts/NotoSansKR-Regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Nanum Gothic';
+  src: url('/fonts/NanumGothic-Regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Nanum Myeongjo';
+  src: url('/fonts/NanumMyeongjo-Regular.woff2') format('woff2');
+}
+
+.App {
+  display: flex;
+  height: 100vh; /* Full viewport height */
+  width: 100vw; /* Full viewport width */
+  margin: 0; /* Remove any default margins */
+  padding: 0; /* Remove any default padding */
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+  overflow: hidden; /* Prevent overflow outside viewport */
+}
+
+.sidebar {
+  width: 300px; /* Fixed sidebar width */
+  background-color: #fff;
+  padding: 20px;
+  border-right: 1px solid #ddd;
+  overflow-y: auto; /* Allow scrolling if content exceeds height */
+  height: 100%; /* Ensure sidebar takes full height */
+  box-sizing: border-box; /* Include padding in width calculation */
+}
+
+.sidebar h2 {
+  font-size: 1.2em;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar ul li {
+  padding: 10px;
+  cursor: pointer;
+  color: #555;
+}
+
+.sidebar ul li:hover {
+  background-color: #f0f0f0;
+  color: #000;
+}
+
+.main-content {
+  flex: 1; /* Take remaining width */
+  padding: 20px;
+  overflow-y: auto; /* Allow scrolling for previews */
+  height: 100%; /* Ensure main content takes full height */
+  box-sizing: border-box; /* Include padding in width calculation */
+  width: 100%; /* Ensure full available width */
+}
+
+.controls {
+  margin-bottom: 20px;
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 100%; /* Ensure controls span full width of main-content */
+}
+
+.controls label {
+  margin-right: 5px;
+  font-weight: bold;
+}
+
+.controls input[type="color"],
+.controls select,
+.controls input[type="range"],
+.controls input[type="text"] {
+  padding: 5px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.controls span {
+  margin-left: 5px;
+  align-self: center;
+}
+
+.font-preview {
+  margin: 20px 0;
+  padding: 15px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 100%; /* Ensure each preview spans full width of main-content */
+}
+
+.font-preview h2 {
+  font-size: 1.1em;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.font-preview p {
+  margin: 0 0 10px 0;
+  word-break: break-word;
+}
+
+.font-preview a {
+  color: #1a73e8;
+  text-decoration: none;
+}
+
+.font-preview a:hover {
+  text-decoration: underline;
 }

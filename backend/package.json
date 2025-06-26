@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon src/index.ts",
-    "build": "tsc",
-    "start": "node dist/apindexp.js"
-  },
+"dev": "nodemon src/index.ts",
+  "build": "tsc",
+  
+  "start": "node dist/apindexp.js" 
+ },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -14,8 +15,6 @@
     "cors": "^2.8.5",
     "express": "^5.1.0",
     "firebase-admin": "^13.4.0",
-    "google-font-downloader": "^1.0.6",
-    "google-fonts-helper": "^3.7.3",
     "multer": "^2.0.1",
     "mysql2": "^3.14.1"
   },
