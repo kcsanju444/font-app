@@ -77,7 +77,7 @@ export const FontCard: React.FC<FontCardProps> = ({
           </div>
         ) : isSupported ? (
           <div
-            className="text-center leading-relaxed break-words w-full"
+            className="text-start leading-relaxed break-words w-full"
             style={{
               fontFamily: font.id,
               color: color,
