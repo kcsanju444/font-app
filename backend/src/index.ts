@@ -21,19 +21,19 @@ app.get('/api/fonts', (req: Request<{}, {}, {}, { page?: string; limit?: string 
   const startIndex = (page - 1) * limit;
 
   try {
-    const files = fs.readdirSync(fontDir); // Synchronous for simplicity
-    console.log('Files found:', files); // Debug files
+    const files = fs.readdirSync(fontDir); 
+    console.log('Files found:', files);
 
     if (files.length === 0) {
       res.status(404).json({ error: 'No fonts found in directory' });
-      return; // Explicit return to ensure void
+      return; 
     }
 
     const fonts = files
       .filter((file) => file.endsWith('.ttf'))
       .map((file) => {
-        const name = file.replace(/-Regular|-VariableFont.*|\.ttf$/i, ''); // Clean name
-        let category = 'sans-serif'; // Default category
+        const name = file.replace(/-Regular|-VariableFont.*|\.ttf$/i, ''); 
+        let category = 'sans-serif'; 
         if (name.toLowerCase().includes('merriweather')) category = 'serif';
         if (name.toLowerCase().includes('dancingscript') || name.toLowerCase().includes('pacifico') || name.toLowerCase().includes('satisfy')) category = 'handwriting';
         if (name.toLowerCase().includes('playfair')) category = 'display';
@@ -41,7 +41,7 @@ app.get('/api/fonts', (req: Request<{}, {}, {}, { page?: string; limit?: string 
         return {
           id: file.replace('.ttf', ''),
           name: name,
-          url: `http://localhost:3000/fonts/${file}`, // Match 'public/fonts'
+          url: `http://localhost:3000/fonts/${file}`, 
           category: category,
         };
       });
@@ -55,11 +55,11 @@ app.get('/api/fonts', (req: Request<{}, {}, {}, { page?: string; limit?: string 
       totalPages: Math.ceil(total / limit),
       totalFonts: total,
     });
-    return; // Explicit return to ensure void
+    return;
   } catch (err) {
     console.error('Readdir error:', err);
     res.status(500).json({ error: 'Failed to load fonts' });
-    return; // Explicit return to ensure void
+    return; 
   }
 });
 

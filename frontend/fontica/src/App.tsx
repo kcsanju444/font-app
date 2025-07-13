@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Search, Type, Grid, List, Sliders, Globe, Palette, RefreshCw } from 'lucide-react';
+import { Search, Type, Grid, List, Palette, RefreshCw } from 'lucide-react';
 import axios from 'axios';
 import { useTheme } from './hooks/useTheme';
 import { ThemeToggle } from './components/ThemeToggle';
 import { FontCard } from './components/FontCard';
 
-type LanguageKey = 'en' | 'np' | 'ko';
+type LanguageKey = 'en' | 'np' | 'ko' | 'hi' | 'jp' | 'zh' | 'ar';
 type ViewMode = 'grid' | 'list';
 
 interface Font {
@@ -36,21 +36,22 @@ function App() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [viewMode, setViewMode] = useState<ViewMode>('list');
-  const [showFilters, setShowFilters] = useState(false);
   const [loadedFonts, setLoadedFonts] = useState<Set<string>>(new Set());
-  // Pagination state
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [totalFonts, setTotalFonts] = useState(0);
   const limit = 6;
 
-  const languages = {
+  const languages: Record<LanguageKey, string> = {
     en: 'Everyone has the right to freedom of thought, conscience',
     np: 'सबै मानिसले विचार, विवेकको स्वतन्त्रता पाउने अधिकार राख्छन्',
     ko: '모든 사람은 사상과 양심의 자유를 가질 권리가 있습니다',
+    hi: 'हर किसी को विचार और अंतरात्मा की स्वतंत्रता का अधिकार है',
+    jp: 'すべての人は思想と良心の自由を有する',
+    zh: '人人有权享有思想、良知的自由',
+    ar: 'لكل إنسان حق في حرية التفكير والضمير',
   };
 
-  // Reset function
   const handleReset = () => {
     setSearchQuery('');
     setSelectedCategory('all');
@@ -60,7 +61,6 @@ function App() {
     setCurrentPage(1);
   };
 
-  // Update color based on theme
   useEffect(() => {
     setColor(theme === 'dark' ? '#ffffff' : '#1f2937');
   }, [theme]);
@@ -156,6 +156,7 @@ function App() {
             </div>
             <ThemeToggle theme={theme} onToggle={toggleTheme} />
           </div>
+
           <div className="relative">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
             <input
@@ -168,6 +169,7 @@ function App() {
                          text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 transition-colors"
             />
           </div>
+
           <button
             onClick={handleReset}
             className="mt-2 flex items-center gap-2 px-3 py-2 w-full text-sm text-gray-600 dark:text-gray-300 
@@ -184,15 +186,9 @@ function App() {
               <Type className="w-4 h-4" />
               <span className="font-medium">Fonts</span>
             </div>
-            <div className="flex items-center gap-3 px-3 py-2 text-gray-600 dark:text-gray-400 
-                            hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 
-                            rounded-lg cursor-pointer transition-colors">
-              <Globe className="w-4 h-4" />
-              <span>Preview</span>
-            </div>
           </nav>
 
-          <div className="mb-6">
+          <div className="mb-8">
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               Preview text
             </label>
@@ -217,63 +213,51 @@ function App() {
               max="72"
               value={fontSize}
               onChange={(e) => setFontSize(parseInt(e.target.value))}
-              className="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer slider"
+              className="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer"
             />
           </div>
 
           <div className="space-y-4">
-            <button
-              onClick={() => setShowFilters(!showFilters)}
-              className="flex items-center justify-between w-full text-left font-medium text-gray-700 
-                         dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
-            >
-              <span className="flex items-center gap-2">
-                <Sliders className="w-4 h-4" />
-                Filters
-              </span>
-              <div className={`transform transition-transform ${showFilters ? 'rotate-180' : ''}`}>
-                ▼
-              </div>
-            </button>
+            <div>
+              <label className="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-1">Language</label>
+              <select
+                value={language}
+                onChange={(e) => setLanguage(e.target.value as LanguageKey)}
+                className="w-full p-2 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 
+                           rounded text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 
+                           text-gray-900 dark:text-white transition-colors"
+              >
+                <option value="en">English</option>
+                <option value="np">नेपाली (Nepali)</option>
+                <option value="ko">한국어 (Korean)</option>
+                <option value="hi">हिन्दी (Hindi)</option>
+                <option value="jp">日本語 (Japanese)</option>
+                <option value="zh">中文 (Chinese)</option>
+                <option value="ar">العربية (Arabic)</option>
+              </select>
+            </div>
 
-            {showFilters && (
-              <div className="space-y-3 pl-6 animate-in slide-in-from-top-1 duration-200">
-                <div>
-                  <label className="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-1">Language</label>
-                  <select
-                    value={language}
-                    onChange={(e) => setLanguage(e.target.value as LanguageKey)}
-                    className="w-full p-2 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 
-                               rounded text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 
-                               text-gray-900 dark:text-white transition-colors"
-                  >
-                    <option value="en">English</option>
-                    <option value="np">नेपाली (Nepali)</option>
-                    <option value="ko">한국어 (Korean)</option>
-                  </select>
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-1">Styles</label>
-                  <select
-                    value={selectedCategory}
-                    onChange={(e) => setSelectedCategory(e.target.value)}
-                    className="w-full p-2 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 
-                               rounded text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 
-                               text-gray-900 dark:text-white transition-colors"
-                  >
-                    {categories.map(cat => (
-                      <option key={cat} value={cat}>
-                        {cat.charAt(0).toUpperCase() + cat.slice(1)}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              </div>
-            )}
+            <div>
+              <label className="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-1">Styles</label>
+              <select
+                value={selectedCategory}
+                onChange={(e) => setSelectedCategory(e.target.value)}
+                className="w-full p-2 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 
+                           rounded text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 
+                           text-gray-900 dark:text-white transition-colors"
+              >
+                {categories.map(cat => (
+                  <option key={cat} value={cat}>
+                    {cat.charAt(0).toUpperCase() + cat.slice(1)}
+                  </option>
+                ))}
+              </select>
+            </div>
           </div>
         </div>
       </div>
 
+      {/* Main content */}
       <div className="flex-1 flex flex-col">
         <div className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 p-4 transition-colors">
           <div className="flex items-center justify-between">
@@ -336,10 +320,10 @@ function App() {
                     loadedFonts={loadedFonts}
                     onDownload={handleDownload}
                     viewMode={viewMode}
+                    direction={language === 'ar' ? 'rtl' : 'ltr'} // Optional prop for RTL languages
                   />
                 ))}
               </div>
-              {/* Pagination Controls at Bottom */}
               <div className="flex items-center justify-center gap-4 mt-6">
                 <button
                   onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
